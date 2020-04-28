@@ -8,7 +8,7 @@
 
 package com.soap.wallet.xsd.models;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="success" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
- *         &lt;element name="errorCode" type="{http://www.w3.org/2001/XMLSchema}integer"/&gt;
- *         &lt;element name="errorMessage" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="document" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="cellphone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -39,81 +39,90 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "success",
-    "errorCode",
-    "errorMessage"
+    "document",
+    "cellphone",
+    "amount"
 })
-@XmlRootElement(name = "Response")
-public class Response {
+@XmlRootElement(name = "rechargeWalletRequest")
+public class RechargeWalletRequest {
 
-    protected boolean success;
     @XmlElement(required = true)
-    protected BigInteger errorCode;
+    protected String document;
     @XmlElement(required = true)
-    protected String errorMessage;
+    protected String cellphone;
+    @XmlElement(required = true)
+    protected BigDecimal amount;
 
     /**
-     * Gets the value of the success property.
-     * 
-     */
-    public boolean isSuccess() {
-        return success;
-    }
-
-    /**
-     * Sets the value of the success property.
-     * 
-     */
-    public void setSuccess(boolean value) {
-        this.success = value;
-    }
-
-    /**
-     * Gets the value of the errorCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getErrorCode() {
-        return errorCode;
-    }
-
-    /**
-     * Sets the value of the errorCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setErrorCode(BigInteger value) {
-        this.errorCode = value;
-    }
-
-    /**
-     * Gets the value of the errorMessage property.
+     * Gets the value of the document property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getDocument() {
+        return document;
     }
 
     /**
-     * Sets the value of the errorMessage property.
+     * Sets the value of the document property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setErrorMessage(String value) {
-        this.errorMessage = value;
+    public void setDocument(String value) {
+        this.document = value;
+    }
+
+    /**
+     * Gets the value of the cellphone property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    /**
+     * Sets the value of the cellphone property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCellphone(String value) {
+        this.cellphone = value;
+    }
+
+    /**
+     * Gets the value of the amount property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    /**
+     * Sets the value of the amount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setAmount(BigDecimal value) {
+        this.amount = value;
     }
 
 }

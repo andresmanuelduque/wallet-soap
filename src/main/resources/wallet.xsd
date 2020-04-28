@@ -13,6 +13,16 @@
         </xs:complexType>
     </xs:element>
 
+     <xs:element name="rechargeWalletRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="document" type="xs:string"/>
+                <xs:element name="cellphone" type="xs:string"/>
+                <xs:element name="amount" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Response">
         <xs:complexType>
             <xs:sequence>

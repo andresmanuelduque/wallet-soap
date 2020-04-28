@@ -23,13 +23,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
 
-	@Bean(name = "countries")
-	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+	@Bean(name = "wallet")
+	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema walletSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("WalletPort");
 		wsdl11Definition.setLocationUri("/ws");
 		wsdl11Definition.setTargetNamespace("http://localhost:8080/wallet-soap");
-		wsdl11Definition.setSchema(countriesSchema);
+		wsdl11Definition.setSchema(walletSchema);
 		return wsdl11Definition;
 	}
 

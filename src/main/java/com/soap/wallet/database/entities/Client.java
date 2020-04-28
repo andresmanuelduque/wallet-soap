@@ -1,9 +1,12 @@
 package com.soap.wallet.database.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 public class Client {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long clientId;
 	
 	@NotEmpty(message = "Por favor indique un documento")
@@ -31,6 +34,9 @@ public class Client {
 	@NotEmpty(message = "Por favor indique un numero de celular")
 	@NotBlank(message = "Por favor indique un numero de celular")
 	private String cellphone;
+	
+	@OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private Wallet wallet;
 	
 	
 	public Long getClientId() {
@@ -69,4 +75,11 @@ public class Client {
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
+	public Wallet getWallet() {
+		return wallet;
+	}
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
+	
 }

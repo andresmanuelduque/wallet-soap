@@ -41,6 +41,15 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    
+    <xs:element name="getBalanceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="document" type="xs:string"/>
+                <xs:element name="cellphone" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="Response">
         <xs:complexType>

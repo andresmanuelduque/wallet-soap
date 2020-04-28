@@ -35,14 +35,17 @@ public class ClientEndpoint {
 			response.setErrorMessage("Cliente creado con exito");
 			response.setSuccess(true);
 			response.setErrorCode(BigInteger.valueOf(0));
+			response.setData("");
 		} catch (GeneralException e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}catch(Exception e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(500));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}
 		return response;
 	}

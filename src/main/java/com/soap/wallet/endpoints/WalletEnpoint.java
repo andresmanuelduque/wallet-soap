@@ -13,14 +13,14 @@ import com.soap.wallet.util.GeneralException;
 import com.soap.wallet.xsd.models.ConfirmPayOrderRequest;
 import com.soap.wallet.xsd.models.CreateClientRequest;
 import com.soap.wallet.xsd.models.GeneratePayOrderRequest;
+import com.soap.wallet.xsd.models.GetBalanceRequest;
 import com.soap.wallet.xsd.models.RechargeWalletRequest;
 import com.soap.wallet.xsd.models.Response;
 
 @Endpoint
 public class WalletEnpoint {
 	private static final String NAMESPACE_URI = "http://localhost:8080/wallet-soap";
-	private static final String NAMESPACE_URI_PAY_ORDER = "http://localhost:8080/wallet-soap/pay-order";
-	
+
 	@Autowired
 	WalletService walletService;
 	
@@ -34,14 +34,17 @@ public class WalletEnpoint {
 			response.setErrorMessage("Cartera recargada con éxito");
 			response.setSuccess(true);
 			response.setErrorCode(BigInteger.valueOf(0));
+			response.setData("");
 		} catch (GeneralException e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}catch(Exception e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(500));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}
 		return response;
 	}
@@ -60,10 +63,12 @@ public class WalletEnpoint {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}catch(Exception e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(500));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}
 		return response;
 	}
@@ -78,14 +83,42 @@ public class WalletEnpoint {
 			response.setErrorMessage("Pago realizado con éxito");
 			response.setSuccess(true);
 			response.setErrorCode(BigInteger.valueOf(0));
+			response.setData("");
 		} catch (GeneralException e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		} catch(Exception e) {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(500));
 			response.setErrorMessage(e.getMessage());
+			response.setData("");
+		}
+		return response;
+	}
+	
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getBalanceRequest")
+	@ResponsePayload
+	public Response getBalanceRequest(@RequestPayload GetBalanceRequest request) {
+		Response response = new Response();
+		
+		try {
+			response.setData(walletService.getBalance(request));
+			response.setErrorMessage("Consulta de saldo");
+			response.setSuccess(true);
+			response.setErrorCode(BigInteger.valueOf(0));
+			response.setData(walletService.getBalance(request));
+		} catch (GeneralException e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(e.getCode()));
+			response.setErrorMessage(e.getMessage());
+			response.setData("");
+		} catch(Exception e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(500));
+			response.setErrorMessage(e.getMessage());
+			response.setData("");
 		}
 		return response;
 	}

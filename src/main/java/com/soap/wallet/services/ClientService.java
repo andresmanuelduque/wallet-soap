@@ -19,7 +19,6 @@ public class ClientService {
 	WalletService walletService;
 	
 	public void saveClient(CreateClientRequest clientRequest) throws GeneralException {
-		System.out.println("Se esta haciendo una peticion");
 		Client client = new Client();
 		Client clientExist = clientRepository.findByDocumentOrEmail(clientRequest.getDocument(), clientRequest.getEmail());
 		if(clientExist == null) {

@@ -17,6 +17,7 @@ import com.soap.wallet.util.Email;
 import com.soap.wallet.util.GeneralException;
 import com.soap.wallet.xsd.models.ConfirmPayOrderRequest;
 import com.soap.wallet.xsd.models.GeneratePayOrderRequest;
+import com.soap.wallet.xsd.models.GetBalanceRequest;
 import com.soap.wallet.xsd.models.RechargeWalletRequest;
 
 @Service
@@ -82,7 +83,7 @@ public class WalletService {
 				payOrders.setAmount(request.getAmount().doubleValue());
 				payOrdersRepository.save(payOrders);
 				String emailBody="Estimado "+ client.getFirstName() +" ha sido generada una orden de pago por "+request.getAmount().doubleValue()+""
-						+  " coins que seran transferidos a "+request.getEmailToPay()+", por favor ingrese al siguiente link para confirmar el pago http://localhost:3000/wallet/confirm/"+token;
+						+  " coins que seran transferidos a "+request.getEmailToPay()+", por favor ingrese al siguiente link para confirmar el pago http://localhost:3000/wallet/pay/confirm/"+token;
 				email.sendEmail(client.getEmail(), "Confirmar Orden de Pago", emailBody);
 				return sessionId;
 			}else {
@@ -110,6 +111,15 @@ public class WalletService {
 			}else {
 				throw new GeneralException("No posee saldo suficiente para realizar el pago",400);
 			}
+		}
+	}
+
+	public String getBalance(GetBalanceRequest request) throws GeneralException {
+		Client  client = clientRepository.findByDocumentAndCellphone(request.getDocument(), request.getCellphone());
+		if(client == null) {
+			throw new GeneralException("El client no existe",400);
+		}else {
+			return String.valueOf(client.getWallet().getAmount()); 
 		}
 	}
 }

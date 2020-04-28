@@ -8,7 +8,6 @@
 
 package com.soap.wallet.xsd.models;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,9 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="document" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="cellphone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/&gt;
+ *         &lt;element name="sessionId" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -39,90 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "document",
-    "cellphone",
-    "amount"
+    "sessionId",
+    "token"
 })
-@XmlRootElement(name = "rechargeWalletRequest")
-public class RechargeWalletRequest {
+@XmlRootElement(name = "confirmPayOrderRequest")
+public class ConfirmPayOrderRequest {
 
     @XmlElement(required = true)
-    protected String document;
+    protected String sessionId;
     @XmlElement(required = true)
-    protected String cellphone;
-    @XmlElement(required = true)
-    protected BigDecimal amount;
+    protected String token;
 
     /**
-     * Gets the value of the document property.
+     * Gets the value of the sessionId property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getDocument() {
-        return document;
+    public String getSessionId() {
+        return sessionId;
     }
 
     /**
-     * Sets the value of the document property.
+     * Sets the value of the sessionId property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDocument(String value) {
-        this.document = value;
+    public void setSessionId(String value) {
+        this.sessionId = value;
     }
 
     /**
-     * Gets the value of the cellphone property.
+     * Gets the value of the token property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCellphone() {
-        return cellphone;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Sets the value of the cellphone property.
+     * Sets the value of the token property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCellphone(String value) {
-        this.cellphone = value;
-    }
-
-    /**
-     * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    /**
-     * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setAmount(BigDecimal value) {
-        this.amount = value;
+    public void setToken(String value) {
+        this.token = value;
     }
 
 }

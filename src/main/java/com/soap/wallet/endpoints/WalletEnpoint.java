@@ -10,6 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.soap.wallet.services.WalletService;
 import com.soap.wallet.util.GeneralException;
+import com.soap.wallet.xsd.models.ConfirmPayOrderRequest;
 import com.soap.wallet.xsd.models.CreateClientRequest;
 import com.soap.wallet.xsd.models.GeneratePayOrderRequest;
 import com.soap.wallet.xsd.models.RechargeWalletRequest;
@@ -37,6 +38,10 @@ public class WalletEnpoint {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+		}catch(Exception e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(500));
+			response.setErrorMessage(e.getMessage());
 		}
 		return response;
 	}
@@ -55,8 +60,35 @@ public class WalletEnpoint {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+		}catch(Exception e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(500));
+			response.setErrorMessage(e.getMessage());
 		}
 		return response;
 	}
+	
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "confirmPayOrderRequest")
+	@ResponsePayload
+	public Response confirmPayOrderRequest(@RequestPayload ConfirmPayOrderRequest request) {
+		Response response = new Response();
+		
+		try {
+			walletService.confirmPayOrder(request);
+			response.setErrorMessage("Pago realizado con éxito");
+			response.setSuccess(true);
+			response.setErrorCode(BigInteger.valueOf(0));
+		} catch (GeneralException e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(e.getCode()));
+			response.setErrorMessage(e.getMessage());
+		} catch(Exception e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(500));
+			response.setErrorMessage(e.getMessage());
+		}
+		return response;
+	}
+
 
 }

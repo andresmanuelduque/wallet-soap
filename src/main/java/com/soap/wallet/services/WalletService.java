@@ -15,6 +15,7 @@ import com.soap.wallet.database.repository.PayOrdersRepository;
 import com.soap.wallet.database.repository.WalletRepository;
 import com.soap.wallet.util.Email;
 import com.soap.wallet.util.GeneralException;
+import com.soap.wallet.xsd.models.ConfirmPayOrderRequest;
 import com.soap.wallet.xsd.models.GeneratePayOrderRequest;
 import com.soap.wallet.xsd.models.RechargeWalletRequest;
 
@@ -78,6 +79,7 @@ public class WalletService {
 				payOrders.setWallet(wallet);
 				payOrders.setEmailToPay(request.getEmailToPay());
 				payOrders.setConfirm(false);
+				payOrders.setAmount(request.getAmount().doubleValue());
 				payOrdersRepository.save(payOrders);
 				String emailBody="Estimado "+ client.getFirstName() +" ha sido generada una orden de pago por "+request.getAmount().doubleValue()+""
 						+  " coins que seran transferidos a "+request.getEmailToPay()+", por favor ingrese al siguiente link para confirmar el pago http://localhost:3000/wallet/confirm/"+token;
@@ -87,6 +89,27 @@ public class WalletService {
 				throw new GeneralException("No posee saldo suficiente para generar la orden de pago",400);
 			}
 		}
+	}
 	
+	@Transactional
+	public void confirmPayOrder(ConfirmPayOrderRequest request) throws GeneralException {
+		PayOrders payOrders = payOrdersRepository.findBySessionIdAndToken(request.getSessionId(),request.getToken());
+		if(payOrders == null) {
+			throw new GeneralException("No exite la orden de pago",400);
+		}else {
+			Wallet wallet = payOrders.getWallet();
+			if(wallet.getAmount() > payOrders.getAmount()) {
+				if(payOrders.isConfirm()) {
+					throw new GeneralException("El pago ya fue procesado",400);
+				}else {
+					wallet.setAmount(wallet.getAmount() - payOrders.getAmount());
+					payOrders.setConfirm(true);
+					walletRepository.save(wallet);
+					payOrdersRepository.save(payOrders);
+				}
+			}else {
+				throw new GeneralException("No posee saldo suficiente para realizar el pago",400);
+			}
+		}
 	}
 }

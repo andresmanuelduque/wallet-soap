@@ -39,6 +39,10 @@ public class ClientEndpoint {
 			response.setSuccess(false);
 			response.setErrorCode(BigInteger.valueOf(e.getCode()));
 			response.setErrorMessage(e.getMessage());
+		}catch(Exception e) {
+			response.setSuccess(false);
+			response.setErrorCode(BigInteger.valueOf(500));
+			response.setErrorMessage(e.getMessage());
 		}
 		return response;
 	}

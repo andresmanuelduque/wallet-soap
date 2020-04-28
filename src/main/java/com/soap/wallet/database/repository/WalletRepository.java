@@ -6,5 +6,4 @@ import com.soap.wallet.database.entities.Wallet;
 
 public interface WalletRepository extends CrudRepository<Wallet,Long>{
 	public Wallet findByClientClientId(Long clientClientId);
-	
 }

@@ -8,7 +8,7 @@
 
 package com.soap.wallet.xsd.models;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,10 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="success" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
- *         &lt;element name="errorCode" type="{http://www.w3.org/2001/XMLSchema}integer"/&gt;
- *         &lt;element name="errorMessage" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="data" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="emailFromPay" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="emailToPay" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -40,108 +39,90 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "success",
-    "errorCode",
-    "errorMessage",
-    "data"
+    "emailFromPay",
+    "emailToPay",
+    "amount"
 })
-@XmlRootElement(name = "Response")
-public class Response {
+@XmlRootElement(name = "generatePayOrderRequest")
+public class GeneratePayOrderRequest {
 
-    protected boolean success;
     @XmlElement(required = true)
-    protected BigInteger errorCode;
+    protected String emailFromPay;
     @XmlElement(required = true)
-    protected String errorMessage;
+    protected String emailToPay;
     @XmlElement(required = true)
-    protected String data;
+    protected BigDecimal amount;
 
     /**
-     * Gets the value of the success property.
-     * 
-     */
-    public boolean isSuccess() {
-        return success;
-    }
-
-    /**
-     * Sets the value of the success property.
-     * 
-     */
-    public void setSuccess(boolean value) {
-        this.success = value;
-    }
-
-    /**
-     * Gets the value of the errorCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getErrorCode() {
-        return errorCode;
-    }
-
-    /**
-     * Sets the value of the errorCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setErrorCode(BigInteger value) {
-        this.errorCode = value;
-    }
-
-    /**
-     * Gets the value of the errorMessage property.
+     * Gets the value of the emailFromPay property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getEmailFromPay() {
+        return emailFromPay;
     }
 
     /**
-     * Sets the value of the errorMessage property.
+     * Sets the value of the emailFromPay property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setErrorMessage(String value) {
-        this.errorMessage = value;
+    public void setEmailFromPay(String value) {
+        this.emailFromPay = value;
     }
 
     /**
-     * Gets the value of the data property.
+     * Gets the value of the emailToPay property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getData() {
-        return data;
+    public String getEmailToPay() {
+        return emailToPay;
     }
 
     /**
-     * Sets the value of the data property.
+     * Sets the value of the emailToPay property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setData(String value) {
-        this.data = value;
+    public void setEmailToPay(String value) {
+        this.emailToPay = value;
+    }
+
+    /**
+     * Gets the value of the amount property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    /**
+     * Sets the value of the amount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setAmount(BigDecimal value) {
+        this.amount = value;
     }
 
 }

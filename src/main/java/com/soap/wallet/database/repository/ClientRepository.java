@@ -8,4 +8,6 @@ public interface ClientRepository extends CrudRepository<Client,Long>{
 	public Client findByDocumentOrEmail(String document, String email);
 	
 	public Client findByDocumentAndCellphone(String document, String cellphone);
+	
+	public Client findByEmail(String email);
 }

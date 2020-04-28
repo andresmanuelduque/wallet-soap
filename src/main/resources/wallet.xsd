@@ -23,12 +23,23 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="generatePayOrderRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="emailFromPay" type="xs:string"/>
+                <xs:element name="emailToPay" type="xs:string"/>
+                <xs:element name="amount" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Response">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="success" type="xs:boolean"/>
                 <xs:element name="errorCode" type="xs:integer"/>
                 <xs:element name="errorMessage" type="xs:string"/>
+                <xs:element name="data" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

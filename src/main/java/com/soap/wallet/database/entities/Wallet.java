@@ -1,10 +1,13 @@
 package com.soap.wallet.database.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +24,18 @@ public class Wallet {
 	@OneToOne
     @MapsId
     private Client client;
+	
+	@OneToMany(mappedBy="wallet")
+    private Set<PayOrders> payOrders;
+	
+
+	public Set<PayOrders> getPayOrders() {
+		return payOrders;
+	}
+
+	public void setPayOrders(Set<PayOrders> payOrders) {
+		this.payOrders = payOrders;
+	}
 
 	public Long getWalletId() {
 		return walletId;
